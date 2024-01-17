@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -30,8 +33,22 @@ const Signup = () => {
     resolver: zodResolver(SignupValidator),
   });
 
-  const onSubmit = ({ full_name, email, password }: TSignupValidator) => {
-    console.log({ full_name, email, password });
+  const router = useRouter();
+
+  const onSubmit = async ({ full_name, email, password }: TSignupValidator) => {
+    try {
+      const res = await axios.post("/api/signup", {
+        full_name,
+        email,
+        password,
+      });
+      router.push("/login");
+      console.log(res);
+      toast.success(res.data.message);
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
     reset();
   };
 
