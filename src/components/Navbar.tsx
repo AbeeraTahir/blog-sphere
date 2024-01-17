@@ -1,5 +1,9 @@
-import Link from "next/link";
+"use client";
+
 import React from "react";
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/lib/redux/features/authSlice";
 
 const navLinks = [
   {
@@ -24,6 +28,16 @@ const authLinks = [
 ];
 
 const Navbar = () => {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  console.log(user);
+
+  const handleLogout = () => {
+    // Dispatch the logout action to update Redux store
+    dispatch(logout());
+  };
+
   return (
     <nav className="flex justify-between px-20 py-6 items-center shadow-sm">
       <div className="text-[1.5rem] font-bold">BlogSphere</div>
@@ -34,11 +48,15 @@ const Navbar = () => {
           </Link>
         ))}
         <div className="border h-full" />
-        {authLinks.map((link) => (
-          <Link href={link.link} key={link.title}>
-            {link.title}
-          </Link>
-        ))}
+        {user ? (
+          <button onClick={handleLogout}>Logout</button>
+        ) : (
+          authLinks.map((link) => (
+            <Link href={link.link} key={link.title}>
+              {link.title}
+            </Link>
+          ))
+        )}
       </div>
     </nav>
   );

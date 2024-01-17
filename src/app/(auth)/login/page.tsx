@@ -22,6 +22,8 @@ import {
   LoginValidator,
 } from "@/lib/validators/authValidator";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { login } from "@/lib/redux/features/authSlice";
 
 const Login = () => {
   const {
@@ -34,12 +36,14 @@ const Login = () => {
   });
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onSubmit = async ({ email, password }: TLoginValidator) => {
     try {
       const res = await axios.post("/api/login", { email, password });
       router.push("/");
       console.log(res);
+      dispatch(login(res.data));
       toast.success(res.data.message);
     } catch (error: any) {
       console.log(error);
