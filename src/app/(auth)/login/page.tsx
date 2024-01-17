@@ -24,7 +24,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
   } = useForm<TLoginValidator>({
     resolver: zodResolver(LoginValidator),
@@ -76,9 +76,7 @@ const Login = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" disabled={!isValid}>
-            Login
-          </Button>
+          <Button className="w-full">Login</Button>
         </CardFooter>
       </form>
     </>

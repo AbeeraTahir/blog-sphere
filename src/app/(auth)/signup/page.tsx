@@ -24,7 +24,7 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
   } = useForm<TSignupValidator>({
     resolver: zodResolver(SignupValidator),
@@ -89,9 +89,7 @@ const Signup = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" disabled={!isValid}>
-            Sign up
-          </Button>
+          <Button className="w-full">Sign up</Button>
         </CardFooter>
       </form>
     </>
