@@ -40,7 +40,7 @@ const Login = () => {
 
   const onSubmit = async ({ email, password }: TLoginValidator) => {
     try {
-      const res = await axios.post("/api/login", { email, password });
+      const res = await axios.post("/api/auth/login", { email, password });
       router.push("/");
       console.log(res);
       dispatch(login(res.data));

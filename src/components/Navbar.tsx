@@ -2,8 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "@/lib/redux/store";
 import { logout } from "@/lib/redux/features/authSlice";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const navLinks = [
   {
@@ -28,14 +32,21 @@ const authLinks = [
 ];
 
 const Navbar = () => {
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
-  console.log(user);
-
-  const handleLogout = () => {
-    // Dispatch the logout action to update Redux store
-    dispatch(logout());
+  const handleLogout = async () => {
+    try {
+      const res = await axios.get("/api/auth/logout");
+      console.log(res);
+      dispatch(logout());
+      router.push("/login");
+      toast.success(res.data.message);
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.error);
+    }
   };
 
   return (

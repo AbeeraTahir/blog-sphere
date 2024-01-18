@@ -37,7 +37,7 @@ const Signup = () => {
 
   const onSubmit = async ({ full_name, email, password }: TSignupValidator) => {
     try {
-      const res = await axios.post("/api/signup", {
+      const res = await axios.post("/api/auth/signup", {
         full_name,
         email,
         password,
