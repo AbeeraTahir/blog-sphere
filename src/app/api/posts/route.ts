@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import Post from "@/lib/models/postModel";
-import { connect } from "@/lib/database/dbConnection";
+import Post from "@/src/lib/models/postModel";
+import { connect } from "@/src/lib/database/dbConnection";
 
 connect();
 
