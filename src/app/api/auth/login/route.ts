@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     let user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid Email or Password" },
+        { error: "Invalid Email or Password!" },
         { status: 400 }
       );
     }
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     if (!isPasswordMatch) {
       return NextResponse.json(
-        { error: "Invalid Email or Password" },
+        { error: "Invalid Email or Password!" },
         { status: 400 }
       );
     }
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     });
 
     const res = NextResponse.json(
-      { message: `Welcome back ${user.username}`, success: true },
+      { message: "Logged in successfully!", success: true },
       { status: 200 }
     );
 

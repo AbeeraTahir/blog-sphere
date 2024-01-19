@@ -7,7 +7,7 @@ import { AppDispatch, useAppSelector } from "@/src/lib/redux/store";
 import { logout } from "@/src/lib/redux/features/authSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useToast } from "@/src/components/ui/use-toast";
 
 const navLinks = [
   {
@@ -35,6 +35,7 @@ const Navbar = () => {
   const user = useAppSelector((state) => state.auth.user);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const { toast } = useToast();
 
   const handleLogout = async () => {
     try {
@@ -42,10 +43,14 @@ const Navbar = () => {
       console.log(res);
       dispatch(logout());
       router.push("/login");
-      toast.success(res.data.message);
+      toast({
+        description: res.data.message,
+      });
     } catch (error: any) {
       console.log(error);
-      toast.error(error.response.data.error);
+      toast({
+        description: error.response.data.error,
+      });
     }
   };
 

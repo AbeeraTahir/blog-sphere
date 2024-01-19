@@ -3,12 +3,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Button } from "@/src/components/ui/button";
+import { useToast } from "@/src/components/ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   CardContent,
@@ -36,6 +36,7 @@ const Signup = () => {
 
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit = async ({ full_name, email, password }: TSignupValidator) => {
     try {
@@ -47,10 +48,14 @@ const Signup = () => {
       });
       router.push("/login");
       console.log(res);
-      toast.success(res.data.message);
+      toast({
+        description: res.data.message,
+      });
     } catch (error: any) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast({
+        description: error.response.data.error,
+      });
     } finally {
       setIsLoading(false);
     }
