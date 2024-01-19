@@ -6,21 +6,21 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/src/components/ui/input";
+import { Label } from "@/src/components/ui/label";
+import { Button } from "@/src/components/ui/button";
 import {
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/src/components/ui/card";
 
 import {
   TSignupValidator,
   SignupValidator,
-} from "@/lib/validators/authValidator";
+} from "@/src/lib/validators/authValidator";
 import Link from "next/link";
 
 const Signup = () => {
