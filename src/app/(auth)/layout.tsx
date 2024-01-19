@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "@/src/components/ui/card";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

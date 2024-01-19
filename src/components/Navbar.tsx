@@ -3,8 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/lib/redux/store";
-import { logout } from "@/lib/redux/features/authSlice";
+import { AppDispatch, useAppSelector } from "@/src/lib/redux/store";
+import { logout } from "@/src/lib/redux/features/authSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
