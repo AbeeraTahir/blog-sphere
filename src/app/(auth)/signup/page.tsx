@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Button } from "@/src/components/ui/button";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   CardContent,
   CardDescription,
@@ -33,10 +34,12 @@ const Signup = () => {
     resolver: zodResolver(SignupValidator),
   });
 
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
 
   const onSubmit = async ({ full_name, email, password }: TSignupValidator) => {
     try {
+      setIsLoading(true);
       const res = await axios.post("/api/auth/signup", {
         full_name,
         email,
@@ -48,6 +51,8 @@ const Signup = () => {
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
     reset();
   };
@@ -106,7 +111,13 @@ const Signup = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Sign up</Button>
+          <Button className="w-full">
+            {isLoading ? (
+              <ReloadIcon className="h-4 w-4 animate-spin" />
+            ) : (
+              "Signup"
+            )}
+          </Button>
         </CardFooter>
       </form>
     </>
