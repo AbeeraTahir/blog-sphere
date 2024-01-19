@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import Comment from "@/lib/models/commentModel";
-import Post from "@/lib/models/postModel";
-import { connect } from "@/lib/database/dbConnection";
+import Comment from "@/src/lib/models/commentModel";
+import Post from "@/src/lib/models/postModel";
+import { connect } from "@/src/lib/database/dbConnection";
 
 connect();
 
@@ -10,13 +10,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const commentData = body;
 
-    // Step 1: Create the comment
     const createdComment = await Comment.create(commentData);
 
-    // Step 2: Retrieve the created comment's ID
     const commentId = createdComment._id;
 
-    // Step 3: Update the associated Post document's comments array
     const { post } = commentData;
     await Post.findByIdAndUpdate(post, {
       $push: { comments: commentId },
