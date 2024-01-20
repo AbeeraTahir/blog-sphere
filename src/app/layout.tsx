@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ContextProvider>
-        <body className={inter.className}>
+        <body className={`${inter.className} bg-[#f8f8f8]`}>
           {children}
           <Toaster />
         </body>

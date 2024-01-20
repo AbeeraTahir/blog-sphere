@@ -23,8 +23,6 @@ import {
   LoginValidator,
 } from "@/src/lib/validators/authValidator";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { login } from "@/src/lib/redux/features/authSlice";
 
 const Login = () => {
   const {
@@ -38,7 +36,6 @@ const Login = () => {
 
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
-  const dispatch = useDispatch();
   const { toast } = useToast();
 
   const onSubmit = async ({ email, password }: TLoginValidator) => {
@@ -47,7 +44,6 @@ const Login = () => {
       const res = await axios.post("/api/auth/login", { email, password });
       router.push("/");
       console.log(res);
-      dispatch(login(res.data));
       toast({
         description: res.data.message,
       });
@@ -82,6 +78,7 @@ const Login = () => {
             <Input
               {...register("email")}
               className={errors?.email ? "focus-visible:ring-red-500" : ""}
+              type="email"
               placeholder="you@example.com"
             />
             {errors?.email && (
@@ -95,6 +92,7 @@ const Login = () => {
             <Input
               {...register("password")}
               className={errors?.password ? "focus-visible:ring-red-500" : ""}
+              type="password"
               placeholder="Password"
             />
             {errors?.password && (

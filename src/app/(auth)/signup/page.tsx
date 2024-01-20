@@ -82,6 +82,7 @@ const Signup = () => {
             <Input
               {...register("full_name")}
               className={errors?.full_name ? "focus-visible:ring-red-500" : ""}
+              type="text"
               placeholder="You full name"
             />
             {errors?.full_name && (
@@ -95,6 +96,7 @@ const Signup = () => {
             <Input
               {...register("email")}
               className={errors?.email ? "focus-visible:ring-red-500" : ""}
+              type="email"
               placeholder="you@example.com"
             />
             {errors?.email && (
@@ -108,6 +110,7 @@ const Signup = () => {
             <Input
               {...register("password")}
               className={errors?.password ? "focus-visible:ring-red-500" : ""}
+              type="password"
               placeholder="Password"
             />
             {errors?.password && (

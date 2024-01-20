@@ -38,11 +38,15 @@ export async function POST(req: NextRequest) {
     });
 
     const res = NextResponse.json(
-      { message: "Logged in successfully!", success: true },
+      {
+        message: "Logged in successfully!",
+        success: true,
+        blogAppToken: token,
+      },
       { status: 200 }
     );
 
-    res.cookies.set("token", token, { httpOnly: true });
+    res.cookies.set("blogAppToken", token, { httpOnly: true });
 
     return res;
   } catch (error: any) {
