@@ -6,6 +6,7 @@ import { logout } from "@/src/lib/redux/features/authSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/src/components/ui/use-toast";
+import { Button } from "./ui/button";
 
 const navLinks = [
   {
@@ -15,17 +16,6 @@ const navLinks = [
   {
     title: "All Posts",
     link: "/posts",
-  },
-];
-
-const authLinks = [
-  {
-    title: "Login",
-    link: "/login",
-  },
-  {
-    title: "Signup",
-    link: "/signup",
   },
 ];
 
@@ -49,6 +39,8 @@ const Navbar = ({ token }: any) => {
     }
   };
 
+  console.log(token);
+
   return (
     <nav className="flex justify-between px-20 py-6 items-center shadow-sm">
       <div className="text-[1.5rem] font-bold">BlogSphere</div>
@@ -60,13 +52,18 @@ const Navbar = ({ token }: any) => {
         ))}
         <div className="border h-full" />
         {token ? (
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>{token.full_name}</button>
         ) : (
-          authLinks.map((link) => (
-            <Link href={link.link} key={link.title}>
-              {link.title}
+          <div className="flex gap-5 items-center">
+            <Link href="/login">
+              <Button variant={"outline"} className="w-20">
+                Login
+              </Button>
             </Link>
-          ))
+            <Link href="/signup">
+              <Button className="w-20">Signup</Button>
+            </Link>
+          </div>
         )}
       </div>
     </nav>
