@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { logout } from "@/src/lib/redux/features/authSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/src/components/ui/use-toast";
 import { Button } from "./ui/button";
+import { ChevronDown } from "lucide-react";
+import { Card, CardContent } from "./ui/card";
 
 const navLinks = [
   {
@@ -20,6 +21,7 @@ const navLinks = [
 ];
 
 const Navbar = ({ token }: any) => {
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -39,8 +41,6 @@ const Navbar = ({ token }: any) => {
     }
   };
 
-  console.log(token);
-
   return (
     <nav className="flex justify-between px-20 py-6 items-center shadow-sm">
       <div className="text-[1.5rem] font-bold">BlogSphere</div>
@@ -52,7 +52,26 @@ const Navbar = ({ token }: any) => {
         ))}
         <div className="border h-full" />
         {token ? (
-          <button onClick={handleLogout}>{token.full_name}</button>
+          <div className="flex gap-2 relative">
+            <h2>{token.full_name}</h2>
+            <ChevronDown
+              size={18}
+              strokeWidth={1.25}
+              className={`mt-[0.3rem] cursor-pointer transition-transform transform duration-300 ease-in-out ${
+                isDropDownOpen ? "rotate-180" : ""
+              }`}
+              onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+            />
+            {isDropDownOpen && (
+              <div className="absolute top-7 w-32 p-4 bg-[#f8f8f8] rounded-md shadow-md flex flex-col gap-3">
+                <p>My posts</p>
+                <p>Write post</p>
+                <p className="cursor-pointer" onClick={handleLogout}>
+                  Logout
+                </p>
+              </div>
+            )}
+          </div>
         ) : (
           <div className="flex gap-5 items-center">
             <Link href="/login">
