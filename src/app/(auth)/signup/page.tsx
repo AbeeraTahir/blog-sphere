@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
-import { Button } from "@/src/components/ui/button";
-import { useToast } from "@/src/components/ui/use-toast";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   CardContent,
@@ -16,12 +16,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/src/components/ui/card";
+} from "@/components/ui/card";
 
 import {
   TSignupValidator,
   SignupValidator,
-} from "@/src/lib/validators/authValidator";
+} from "@/lib/validators/authValidator";
 import Link from "next/link";
 
 const Signup = () => {

@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/src/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
-import { Card, CardContent } from "./ui/card";
 
 const navLinks = [
   {

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ContextProvider from "@/src/lib/redux/ContextProvider";
-import { Toaster } from "../components/ui/toaster";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ContextProvider>
-        <body className={`${inter.className} bg-[#f8f8f8]`}>
-          {children}
-          <Toaster />
-        </body>
-      </ContextProvider>
+      <body className={`${inter.className} bg-[#f8f8f8]`}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }
