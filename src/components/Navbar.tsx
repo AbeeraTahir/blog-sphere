@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
+
+interface UserData {
+  id: string;
+  full_name: string;
+  email: string;
+}
 
 const navLinks = [
   {
@@ -19,10 +25,19 @@ const navLinks = [
   },
 ];
 
-const Navbar = ({ token }: any) => {
+const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [user, setUser] = useState<UserData | null>(null);
   const router = useRouter();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const getUserDetails = async () => {
+      const res = await axios.get("/api/user");
+      setUser(res.data.data);
+    };
+    void getUserDetails();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -50,9 +65,9 @@ const Navbar = ({ token }: any) => {
           </Link>
         ))}
         <div className="border h-full" />
-        {token ? (
+        {user ? (
           <div className="flex gap-2 relative">
-            <h2>{token.full_name}</h2>
+            <h2>{user.full_name}</h2>
             <ChevronDown
               size={18}
               strokeWidth={1.25}
