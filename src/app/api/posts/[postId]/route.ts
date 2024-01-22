@@ -1,7 +1,7 @@
-import Post from "@/src/lib/models/postModel";
+import Post from "@/lib/models/postModel";
 import { NextRequest, NextResponse } from "next/server";
-import { connect } from "@/src/lib/database/dbConnection";
-import { Params } from "@/src/lib/utils";
+import { connect } from "@/lib/database/dbConnection";
+import { Params } from "@/lib/utils";
 
 connect();
 

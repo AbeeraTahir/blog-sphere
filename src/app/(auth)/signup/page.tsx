@@ -1,26 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
-import { Button } from "@/src/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/src/components/ui/card";
+} from "@/components/ui/card";
 
 import {
   TSignupValidator,
   SignupValidator,
-} from "@/src/lib/validators/authValidator";
+} from "@/lib/validators/authValidator";
 import Link from "next/link";
 
 const Signup = () => {
@@ -33,10 +34,13 @@ const Signup = () => {
     resolver: zodResolver(SignupValidator),
   });
 
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit = async ({ full_name, email, password }: TSignupValidator) => {
     try {
+      setIsLoading(true);
       const res = await axios.post("/api/auth/signup", {
         full_name,
         email,
@@ -44,10 +48,16 @@ const Signup = () => {
       });
       router.push("/login");
       console.log(res);
-      toast.success(res.data.message);
+      toast({
+        description: res.data.message,
+      });
     } catch (error: any) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast({
+        description: error.response.data.error,
+      });
+    } finally {
+      setIsLoading(false);
     }
     reset();
   };
@@ -72,6 +82,7 @@ const Signup = () => {
             <Input
               {...register("full_name")}
               className={errors?.full_name ? "focus-visible:ring-red-500" : ""}
+              type="text"
               placeholder="You full name"
             />
             {errors?.full_name && (
@@ -85,6 +96,7 @@ const Signup = () => {
             <Input
               {...register("email")}
               className={errors?.email ? "focus-visible:ring-red-500" : ""}
+              type="email"
               placeholder="you@example.com"
             />
             {errors?.email && (
@@ -98,6 +110,7 @@ const Signup = () => {
             <Input
               {...register("password")}
               className={errors?.password ? "focus-visible:ring-red-500" : ""}
+              type="password"
               placeholder="Password"
             />
             {errors?.password && (
@@ -106,7 +119,13 @@ const Signup = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Sign up</Button>
+          <Button className="w-full">
+            {isLoading ? (
+              <ReloadIcon className="h-4 w-4 animate-spin" />
+            ) : (
+              "Signup"
+            )}
+          </Button>
         </CardFooter>
       </form>
     </>

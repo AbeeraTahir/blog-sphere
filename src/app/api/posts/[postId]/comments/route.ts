@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import Comment from "@/src/lib/models/commentModel";
-import { connect } from "@/src/lib/database/dbConnection";
-import { Params } from "@/src/lib/utils";
+import Comment from "@/lib/models/commentModel";
+import { connect } from "@/lib/database/dbConnection";
+import { Params } from "@/lib/utils";
 
 connect();
 

@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/src/lib/redux/store";
-import { logout } from "@/src/lib/redux/features/authSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "./ui/button";
+import { ChevronDown } from "lucide-react";
 
 const navLinks = [
   {
@@ -20,32 +19,24 @@ const navLinks = [
   },
 ];
 
-const authLinks = [
-  {
-    title: "Login",
-    link: "/login",
-  },
-  {
-    title: "Signup",
-    link: "/signup",
-  },
-];
-
-const Navbar = () => {
-  const user = useAppSelector((state) => state.auth.user);
+const Navbar = ({ token }: any) => {
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
+  const { toast } = useToast();
 
   const handleLogout = async () => {
     try {
       const res = await axios.get("/api/auth/logout");
       console.log(res);
-      dispatch(logout());
       router.push("/login");
-      toast.success(res.data.message);
+      toast({
+        description: res.data.message,
+      });
     } catch (error: any) {
       console.log(error);
-      toast.error(error.response.data.error);
+      toast({
+        description: error.response.data.error,
+      });
     }
   };
 
@@ -59,14 +50,38 @@ const Navbar = () => {
           </Link>
         ))}
         <div className="border h-full" />
-        {user ? (
-          <button onClick={handleLogout}>Logout</button>
+        {token ? (
+          <div className="flex gap-2 relative">
+            <h2>{token.full_name}</h2>
+            <ChevronDown
+              size={18}
+              strokeWidth={1.25}
+              className={`mt-[0.3rem] cursor-pointer transition-transform transform duration-300 ease-in-out ${
+                isDropDownOpen ? "rotate-180" : ""
+              }`}
+              onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+            />
+            {isDropDownOpen && (
+              <div className="absolute top-7 w-32 p-4 bg-[#f8f8f8] rounded-md shadow-md flex flex-col gap-3">
+                <p>My posts</p>
+                <p>Write post</p>
+                <p className="cursor-pointer" onClick={handleLogout}>
+                  Logout
+                </p>
+              </div>
+            )}
+          </div>
         ) : (
-          authLinks.map((link) => (
-            <Link href={link.link} key={link.title}>
-              {link.title}
+          <div className="flex gap-5 items-center">
+            <Link href="/login">
+              <Button variant={"outline"} className="w-20">
+                Login
+              </Button>
             </Link>
-          ))
+            <Link href="/signup">
+              <Button className="w-20">Signup</Button>
+            </Link>
+          </div>
         )}
       </div>
     </nav>

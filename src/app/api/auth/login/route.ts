@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { connect } from "@/src/lib/database/dbConnection";
-import User from "@/src/lib/models/userModel";
+import { connect } from "@/lib/database/dbConnection";
+import User from "@/lib/models/userModel";
 
 connect();
 
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     let user = await User.findOne({ email });
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid Email or Password" },
+        { error: "Invalid Email or Password!" },
         { status: 400 }
       );
     }
@@ -22,14 +22,14 @@ export async function POST(req: NextRequest) {
 
     if (!isPasswordMatch) {
       return NextResponse.json(
-        { error: "Invalid Email or Password" },
+        { error: "Invalid Email or Password!" },
         { status: 400 }
       );
     }
 
     const tokenData = {
       id: user._id,
-      username: user.username,
+      full_name: user.full_name,
       email: user.email,
     };
 
@@ -38,11 +38,15 @@ export async function POST(req: NextRequest) {
     });
 
     const res = NextResponse.json(
-      { message: `Welcome back ${user.username}`, success: true },
+      {
+        message: "Logged in successfully!",
+        success: true,
+        blogAppToken: token,
+      },
       { status: 200 }
     );
 
-    res.cookies.set("token", token, { httpOnly: true });
+    res.cookies.set("blogAppToken", token, { httpOnly: true });
 
     return res;
   } catch (error: any) {

@@ -1,29 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
-import { Button } from "@/src/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/src/components/ui/card";
+} from "@/components/ui/card";
 
 import {
   TLoginValidator,
   LoginValidator,
-} from "@/src/lib/validators/authValidator";
+} from "@/lib/validators/authValidator";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { login } from "@/src/lib/redux/features/authSlice";
 
 const Login = () => {
   const {
@@ -35,19 +34,26 @@ const Login = () => {
     resolver: zodResolver(LoginValidator),
   });
 
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const router = useRouter();
-  const dispatch = useDispatch();
+  const { toast } = useToast();
 
   const onSubmit = async ({ email, password }: TLoginValidator) => {
     try {
+      setIsLoading(true);
       const res = await axios.post("/api/auth/login", { email, password });
       router.push("/");
       console.log(res);
-      dispatch(login(res.data));
-      toast.success(res.data.message);
+      toast({
+        description: res.data.message,
+      });
     } catch (error: any) {
       console.log(error);
-      toast.error(error.response.data.error);
+      toast({
+        description: error.response.data.error,
+      });
+    } finally {
+      setIsLoading(false);
     }
     reset();
   };
@@ -72,6 +78,7 @@ const Login = () => {
             <Input
               {...register("email")}
               className={errors?.email ? "focus-visible:ring-red-500" : ""}
+              type="email"
               placeholder="you@example.com"
             />
             {errors?.email && (
@@ -85,6 +92,7 @@ const Login = () => {
             <Input
               {...register("password")}
               className={errors?.password ? "focus-visible:ring-red-500" : ""}
+              type="password"
               placeholder="Password"
             />
             {errors?.password && (
@@ -93,7 +101,13 @@ const Login = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Login</Button>
+          <Button className="w-full">
+            {isLoading ? (
+              <ReloadIcon className="h-4 w-4 animate-spin" />
+            ) : (
+              "Login"
+            )}
+          </Button>
         </CardFooter>
       </form>
     </>
