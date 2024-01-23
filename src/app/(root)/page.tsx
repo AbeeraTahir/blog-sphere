@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import PostsList from "@/components/PostsList";
 
 export default function Home() {
   return (
-    <div className="mx-auto w-full max-w-screen-xl">
-      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 px-5 md:px-20 pt-20 sm:pt-0">
+    <div className="mx-auto w-full max-w-screen-xl px-5 md:px-20">
+      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 pt-20 sm:pt-10">
         <h1 className="font-extrabold text-3xl sm:text-5xl">
           Connect Through Stories
         </h1>
@@ -21,6 +22,10 @@ export default function Home() {
           <Button className="w-36">Start Writing</Button>
         </div>
       </div>
+      <h2 className="font-[600] text-3xl sm:text-4xl mb-10">
+        Latest Blog Posts:
+      </h2>
+      <PostsList />
     </div>
   );
 }
