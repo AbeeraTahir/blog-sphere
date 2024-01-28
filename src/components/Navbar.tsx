@@ -56,7 +56,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full fixed top-0 z-10 bg-[#f8f8f8]">
+    <header className="w-full fixed top-0 z-20 bg-[#f8f8f8]">
       <nav className="flex justify-between px-20 py-6 items-center shadow-sm">
         <div className="text-[1.5rem] font-bold">BlogSphere</div>
         <div className="flex items-center gap-8 h-8">

@@ -1,9 +1,15 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PostCard from "./PostCard";
 import { PostCardProps } from "@/lib/utils";
 
-const PostsList = () => {
+interface PostsListProps {
+  category?: string;
+}
+
+const PostsList = ({ category }: PostsListProps) => {
   const [posts, setPosts] = useState<PostCardProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,7 +19,15 @@ const PostsList = () => {
       try {
         const res = await axios.get("/api/posts");
         console.log(res.data.posts);
-        setPosts(res.data.posts);
+        if (category) {
+          setPosts(
+            res.data.posts.filter(
+              (post: { category: string }) => post.category === category
+            )
+          );
+        } else {
+          setPosts(res.data.posts);
+        }
       } catch (error) {
         console.log(error);
       } finally {
@@ -21,7 +35,7 @@ const PostsList = () => {
       }
     };
     void getPosts();
-  }, []);
+  }, [category]);
   return (
     <div className="grid gap-5 grid-responsive">
       {isLoading
