@@ -1,56 +1,47 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import PostCard from "./PostCard";
 import { PostCardProps } from "@/lib/utils";
 
 interface PostsListProps {
-  category?: string;
+  simplified?: boolean;
+  author?: string;
 }
 
-const PostsList = ({ category }: PostsListProps) => {
-  const [posts, setPosts] = useState<PostCardProps[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+const getPosts = async () => {
+  const res = await fetch("http://localhost:3000/api/posts", {
+    cache: "no-store",
+  });
 
-  useEffect(() => {
-    const getPosts = async () => {
-      setIsLoading(true);
-      try {
-        const res = await axios.get("/api/posts");
-        console.log(res.data.posts);
-        if (category) {
-          setPosts(
-            res.data.posts.filter(
-              (post: { category: string }) => post.category === category
-            )
-          );
-        } else {
-          setPosts(res.data.posts);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    void getPosts();
-  }, [category]);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return res.json();
+};
+
+const PostsList = async ({ simplified, author }: PostsListProps) => {
+  const posts = await getPosts();
+  let displayedPosts = [];
+  if (author) {
+    displayedPosts = posts?.posts?.filter(
+      (post: { author: string }) => post.author === author
+    );
+  } else {
+    displayedPosts = posts?.posts || [];
+  }
   return (
-    <div className="grid gap-5 grid-responsive">
-      {isLoading
-        ? "loading"
-        : posts?.map((post) => (
-            <PostCard
-              key={post._id}
-              _id={post._id}
-              title={post.title}
-              content={post.content}
-              image={post.image}
-              author={post.author}
-              category={post.category}
-            />
-          ))}
+    <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start">
+      {displayedPosts.map((post: PostCardProps) => (
+        <PostCard
+          key={post._id}
+          _id={post._id}
+          title={post.title}
+          content={post.content}
+          image={post.image}
+          author={post.author}
+          category={post.category}
+        />
+      ))}
     </div>
   );
 };

@@ -26,7 +26,7 @@ export default function Home() {
       <h2 className="font-[600] text-3xl sm:text-4xl mb-10">
         Latest Blog Posts:
       </h2>
-      <PostsList />
+      <PostsList simplified />
       <div className="border ml-auto my-12">
         <Link href="/posts">
           <Button>View All Posts</Button>

@@ -14,10 +14,16 @@ const PostCard = ({
 }: PostCardProps) => {
   return (
     <>
-      <div className="p-6 flex flex-col gap-6 rounded-md bg-white w-[360px] border">
+      <div className="p-6 flex flex-col gap-6 rounded-md bg-white w-[340px] sm:w-[360px] border">
         <h2 className="font-[600] text-lg sm:text-xl">{title}</h2>
         <div className="w-full h-[175px] relative overflow-hidden">
-          <Image src={image} alt={title} layout="fill" objectFit="cover" />
+          <Image
+            src={image}
+            alt={title}
+            layout="fill"
+            sizes="(max-width: 360px) 100vw"
+            objectFit="cover"
+          />
         </div>
         <p className="text-[0.9rem]">
           {content.split(" ").slice(0, 15).join(" ")} ...

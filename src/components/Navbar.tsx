@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
 
 interface UserData {
-  id: string;
+  _id: string;
   full_name: string;
   email: string;
 }
@@ -79,7 +79,9 @@ const Navbar = () => {
               />
               {isDropDownOpen && (
                 <div className="absolute top-7 w-32 p-4 bg-[#f8f8f8] rounded-md shadow-md flex flex-col gap-3">
-                  <p>My posts</p>
+                  <Link href={`/${user._id}`}>
+                    <p>My posts</p>
+                  </Link>
                   <p>Write post</p>
                   <p className="cursor-pointer" onClick={handleLogout}>
                     Logout
