@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-poppins);
+}
+
+.grid-responsive {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
