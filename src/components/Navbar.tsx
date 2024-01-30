@@ -82,7 +82,9 @@ const Navbar = () => {
                   <Link href={`/${user._id}`}>
                     <p>My posts</p>
                   </Link>
-                  <p>Write post</p>
+                  <Link href="/createPost">
+                    <p>Write post</p>
+                  </Link>
                   <p className="cursor-pointer" onClick={handleLogout}>
                     Logout
                   </p>

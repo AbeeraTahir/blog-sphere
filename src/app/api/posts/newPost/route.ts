@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import Post from "@/lib/models/postModel";
 import { connect } from "@/lib/database/dbConnection";
+import { getDataFromToken } from "@/lib/helpers/getDataFromToken";
 
 connect();
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const postData = body.formData;
-
-    await Post.create(postData);
+    const postData = await req.json();
+    const author = await getDataFromToken(req);
+    console.log({ ...postData, author });
+    await Post.create({ ...postData, author });
 
     return NextResponse.json(
       { message: "Post created successfully!" },
