@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PostForm from "@/components/PostForm";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 
-const CreatePost = () => {
+const EditPost = ({ params }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -14,6 +14,18 @@ const CreatePost = () => {
   });
 
   const { toast } = useToast();
+
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        const res = await axios.get(`/api/posts/${params.id}`);
+        setFormData(res.data.post);
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    };
+    void getPost();
+  }, [params.id]);
 
   const handleChange = (e: any) => {
     const { name, files } = e.target;
@@ -45,7 +57,7 @@ const CreatePost = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post("/api/posts/newPost", formData);
+      const res = await axios.put(`/api/posts/${params.id}`, formData);
       setFormData({
         title: "",
         image: "",
@@ -62,10 +74,10 @@ const CreatePost = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <PostForm
       formData={formData}
+      editPost
       isLoading={isLoading}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
@@ -73,4 +85,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

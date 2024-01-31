@@ -9,7 +9,6 @@ export async function POST(req: NextRequest) {
   try {
     const postData = await req.json();
     const author = await getDataFromToken(req);
-    console.log({ ...postData, author });
     await Post.create({ ...postData, author });
 
     return NextResponse.json(

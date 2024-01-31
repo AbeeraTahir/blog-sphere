@@ -7,7 +7,7 @@ interface PostAuthorProps {
 
 const PostAuthor = async ({ authorId }: PostAuthorProps) => {
   const user = await getUser(authorId);
-  return <>{user.full_name}</>;
+  return <p>Author: {user.full_name}</p>;
 };
 
 export default PostAuthor;

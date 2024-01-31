@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "../components/ui/button";
+import { Button } from "@/components/ui/button";
 import Wrapper from "./Wrapper";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 interface FormDataProps {
   title: string;
@@ -11,12 +12,14 @@ interface FormDataProps {
 interface PostFormProps {
   formData: FormDataProps;
   editPost?: boolean;
+  isLoading: boolean;
   handleChange: (e: any) => void;
   handleSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const PostForm = ({
   formData,
+  isLoading,
   editPost,
   handleChange,
   handleSubmit,
@@ -56,7 +59,11 @@ const PostForm = ({
           />
         </div>
         <Button onClick={handleSubmit}>
-          {editPost ? "Edit Post" : "Create Post"}
+          {isLoading ? (
+            <ReloadIcon className="h-4 w-4 animate-spin" />
+          ) : (
+            <>{editPost ? "Edit Post" : "Create Post"}</>
+          )}
         </Button>
       </form>
     </Wrapper>
