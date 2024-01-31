@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import PostForm from "@/components/PostForm";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
@@ -8,18 +9,21 @@ import { Params } from "@/lib/utils";
 
 const EditPost = ({ params }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [authorId, setAuthorId] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     image: "",
     content: "",
   });
 
+  const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
     const getPost = async () => {
       try {
         const res = await axios.get(`/api/posts/${params.id}`);
+        setAuthorId(res.data.post.author);
         setFormData(res.data.post);
       } catch (error: any) {
         console.log(error.message);
@@ -58,12 +62,16 @@ const EditPost = ({ params }: any) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.put(`/api/posts/${params.id}`, formData);
+      const res = await axios.put(`/api/posts/${params.id}`, {
+        ...formData,
+        authorId,
+      });
       setFormData({
         title: "",
         image: "",
         content: "",
       });
+      router.push(`/${authorId}`);
       toast({
         description: res.data.message,
       });
