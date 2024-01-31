@@ -6,7 +6,16 @@ import moment from "moment";
 import PostAuthor from "@/components/PostAuthor";
 import { decodeToken } from "@/lib/helpers/getDataFromToken";
 import Wrapper from "@/components/Wrapper";
-import Link from "next/link";
+import PostActions from "@/components/PostActions";
+
+export const generateMetadata = async ({ params }: any) => {
+  const post = await getPost(params.id);
+  const { title, content } = post.post;
+  return {
+    title,
+    content,
+  };
+};
 
 const getPost = async (postId: string) => {
   const res = await fetch(`http://localhost:3000/api/posts/${postId}`, {
@@ -18,15 +27,6 @@ const getPost = async (postId: string) => {
   }
 
   return res.json();
-};
-
-export const generateMetadata = async ({ params }: any) => {
-  const post = await getPost(params.id);
-  const { title, content } = post.post;
-  return {
-    title,
-    content,
-  };
 };
 
 const PostDetails = async ({ params }: any) => {
@@ -49,12 +49,7 @@ const PostDetails = async ({ params }: any) => {
             <p>Created at: {moment(createdAt).format("MMMM DD, YYYY")}</p>
           </div>
           {token && decodedToken.id === author && (
-            <div className="flex gap-3">
-              <Link href={`/posts/${params.id}/editPost`}>
-                <p>Edit</p>
-              </Link>
-              <p>Delete</p>
-            </div>
+            <PostActions postId={params.id} authorId={author} />
           )}
         </div>
 

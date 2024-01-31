@@ -16,5 +16,5 @@ export interface PostCardProps {
 
 export interface Params {
   postId: string;
-  commentId: string;
+  commentId?: string;
 }
