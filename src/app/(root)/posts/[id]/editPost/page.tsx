@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import PostForm from "@/components/PostForm";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
-import { Params } from "@/lib/utils";
 
 const EditPost = ({ params }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
