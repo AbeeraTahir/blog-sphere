@@ -56,9 +56,13 @@ const CreatePost = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
+      console.log({
+        ...formData,
+        author: authorId,
+      });
       const res = await axios.post("/api/posts/newPost", {
         ...formData,
-        authorId,
+        author: authorId,
       });
       setFormData({
         title: "",

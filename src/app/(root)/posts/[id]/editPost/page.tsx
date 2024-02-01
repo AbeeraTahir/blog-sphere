@@ -64,7 +64,7 @@ const EditPost = ({ params }: any) => {
       setIsLoading(true);
       const res = await axios.put(`/api/posts/${params.id}`, {
         ...formData,
-        authorId,
+        author: authorId,
       });
       setFormData({
         title: "",
