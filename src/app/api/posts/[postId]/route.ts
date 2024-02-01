@@ -16,8 +16,7 @@ export async function PUT(req: NextRequest, { params }: { params: Params }) {
   try {
     const { postId } = params;
 
-    const body = await req.json();
-    const postData = body.formData;
+    const postData = await req.json();
 
     await Post.findByIdAndUpdate(postId, {
       ...postData,

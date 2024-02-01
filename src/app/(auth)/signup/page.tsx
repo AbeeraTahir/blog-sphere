@@ -34,7 +34,7 @@ const Signup = () => {
     resolver: zodResolver(SignupValidator),
   });
 
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
 
