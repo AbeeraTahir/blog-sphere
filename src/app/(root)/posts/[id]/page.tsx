@@ -18,9 +18,12 @@ export const generateMetadata = async ({ params }: any) => {
 };
 
 const getPost = async (postId: string) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${postId}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `https://blog-sphere-one.vercel.app/api/posts/${postId}`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Something went wrong");
