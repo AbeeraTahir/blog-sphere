@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import Post from "@/lib/models/postModel";
 import { connect } from "@/lib/database/dbConnection";
 
+export const dynamic = "force-dynamic";
+
+/**
+ * @method GET
+ * @returns NextResponse
+ * @description Find All Posts
+ */
+
 connect();
 
 export async function GET() {
