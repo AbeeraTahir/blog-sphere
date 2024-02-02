@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "./ui/button";
@@ -29,6 +30,7 @@ const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [user, setUser] = useState<UserData | null>(null);
   const router = useRouter();
+  const pathname = usePathname();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -61,7 +63,10 @@ const Navbar = () => {
         <div className="text-[1.5rem] font-bold">BlogSphere</div>
         <div className="flex items-center gap-8 h-8">
           {navLinks.map((link) => (
-            <Link href={link.link} key={link.title}>
+            <Link
+              href={link.link}
+              key={link.title}
+              className={`${pathname === link.link ? "active" : ""} on_hover`}>
               {link.title}
             </Link>
           ))}

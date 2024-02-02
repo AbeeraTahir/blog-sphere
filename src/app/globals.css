@@ -13,8 +13,15 @@ body {
   font-family: var(--font-poppins);
 }
 
-.grid-responsive {
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+.active {
+  font-weight: 600;
+  border-bottom: 2px solid black;
+  transition: all 0.5s ease;
+}
+
+.on_hover:hover {
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 @layer base {
