@@ -8,15 +8,6 @@ import { decodeToken } from "@/lib/helpers/getDataFromToken";
 import Wrapper from "@/components/Wrapper";
 import PostActions from "@/components/PostActions";
 
-export const generateMetadata = async ({ params }: any) => {
-  const post = await getPost(params.id);
-  const { title, content } = post.post;
-  return {
-    title,
-    content,
-  };
-};
-
 const getPost = async (postId: string) => {
   const res = await fetch(
     `https://blog-sphere-one.vercel.app/api/posts/${postId}`,
@@ -30,6 +21,15 @@ const getPost = async (postId: string) => {
   }
 
   return res.json();
+};
+
+export const generateMetadata = async ({ params }: any) => {
+  const post = await getPost(params.id);
+  const { title, content } = post.post;
+  return {
+    title,
+    content,
+  };
 };
 
 const PostDetails = async ({ params }: any) => {
