@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="px-5 md:px-28 flex flex-col">
-      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 pt-20 sm:pt-10">
+      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 pt-10">
         <h1 className="font-extrabold text-3xl sm:text-5xl">
           Connect Through Stories
         </h1>
