@@ -24,7 +24,7 @@ interface UserData {
 }
 
 interface DropDownItemProps {
-  icon: LucideIcon;
+  icon?: LucideIcon;
   link: string;
   label: string;
   onClick: () => void;
@@ -33,7 +33,7 @@ interface DropDownItemProps {
 const DropdownItem = ({ icon, link, label, onClick }: DropDownItemProps) => {
   return (
     <Link href={link}>
-      <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-2 rounded-sm">
+      <div className="flex gap-4 md:gap-3 items-center md:hover:bg-[#F0F0F0] p-0 md:p-2 md:rounded-sm">
         {icon && React.createElement(icon, { size: 18, strokeWidth: 1.25 })}
         <p onClick={onClick}>{label}</p>
       </div>
@@ -101,6 +101,32 @@ const Navbar = () => {
           {isMobileMenuActive && (
             <div className="flex flex-col items-start justify-center gap-4">
               <NavItems onNavItemClick={toggleMenuBar} />
+              {user ? (
+                <>
+                  <DropdownItem
+                    link={`/${user._id}`}
+                    label="My posts"
+                    onClick={toggleMenuBar}
+                  />
+                  <DropdownItem
+                    link="/createPost"
+                    label="Write post"
+                    onClick={toggleMenuBar}
+                  />
+                  <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-0 md:p-2 rounded-sm">
+                    <LogOut
+                      size={18}
+                      strokeWidth={1.25}
+                      className="hidden md:block"
+                    />
+                    <p className="cursor-pointer" onClick={handleLogout}>
+                      Logout
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <Link href="/login">Login</Link>
+              )}
             </div>
           )}
         </div>

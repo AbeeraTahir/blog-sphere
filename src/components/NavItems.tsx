@@ -27,7 +27,9 @@ const NavItems = ({ onNavItemClick }: NavItemsProps) => {
         <div key={link.title} onClick={onNavItemClick}>
           <Link
             href={link.link}
-            className={`${pathname === link.link ? "active" : ""} on_hover`}>
+            className={`${
+              !onNavItemClick ? (pathname === link.link ? "active" : "") : ""
+            } md:on_hover`}>
             {link.title}
           </Link>
         </div>
