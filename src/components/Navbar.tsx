@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -60,10 +60,12 @@ const Navbar = () => {
     try {
       const res = await axios.get("/api/auth/logout");
       console.log(res);
-      router.push("/login");
+      if (isMobileMenuActive) setIsMobileMenuActive(false);
       toast({
         description: res.data.message,
       });
+      setUser(null);
+      router.push("/");
     } catch (error: any) {
       console.log(error);
       toast({
@@ -77,7 +79,6 @@ const Navbar = () => {
   };
 
   const toggleDropDown = () => {
-    console.log("dropdown");
     setIsDropDownOpen(!isDropDownOpen);
   };
 
@@ -113,7 +114,7 @@ const Navbar = () => {
                     label="Write post"
                     onClick={toggleMenuBar}
                   />
-                  <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-0 md:p-2 rounded-sm">
+                  <div className="flex gap-3 items-center md:hover:bg-[#F0F0F0] p-0 md:p-2 rounded-sm">
                     <LogOut
                       size={18}
                       strokeWidth={1.25}
@@ -139,7 +140,7 @@ const Navbar = () => {
               <ChevronDown
                 size={18}
                 strokeWidth={1.25}
-                className={`mt-[0.3rem] cursor-pointer transition-transform transform duration-300 ease-in-out ${
+                className={`mt-[0.25rem] cursor-pointer transition-transform transform duration-300 ease-in-out ${
                   isDropDownOpen ? "rotate-180" : ""
                 }`}
                 onClick={toggleDropDown}

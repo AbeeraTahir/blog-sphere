@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { PostCardProps } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
 
 const PostCard = ({
   _id,
@@ -26,11 +27,19 @@ const PostCard = ({
           />
         </div>
         <p className="text-[0.9rem]">
-          {content.split(" ").slice(0, 15).join(" ")} ...
+          {content.split(" ").length > 15
+            ? content.split(" ").slice(0, 15).join(" ")
+            : content}{" "}
+          ...
         </p>
         <div className="ml-auto mt-auto">
           <Link href={`/posts/${_id}`}>
-            <Button>Read Full Post </Button>
+            <Button variant={"secondary"} className="flex gap-2 items-center">
+              <span>Read Full Post</span>
+              <span>
+                <ChevronRight size={20} strokeWidth={2} />
+              </span>
+            </Button>
           </Link>
         </div>
       </div>

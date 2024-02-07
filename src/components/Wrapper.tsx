@@ -6,7 +6,7 @@ interface WrapperProps {
 
 const Wrapper = ({ children }: WrapperProps) => {
   return (
-    <div className="px-2 md:px-6 lg:px-28 flex flex-col gap-8 pt-28 sm:pt-36 pb-20 border">
+    <div className="px-2 md:px-3 lg:px-28 flex flex-col gap-8 pt-28 sm:pt-36 pb-20 border">
       {children}
     </div>
   );
