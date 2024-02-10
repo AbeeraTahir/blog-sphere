@@ -87,7 +87,7 @@ const Navbar = () => {
       {/* Overlay */}
       {isMobileMenuActive && (
         <div
-          className="fixed top-[58px] left-0 w-full h-full bg-black opacity-50 z-10"
+          className="fixed top-[55px] left-0 w-full h-full bg-black opacity-50 z-10"
           onClick={() => setIsMobileMenuActive(false)}></div>
       )}
       <nav className="flex justify-between sm:px-20 sm:py-6 px-10 py-4 items-center shadow-sm">
@@ -114,16 +114,9 @@ const Navbar = () => {
                     label="Write post"
                     onClick={toggleMenuBar}
                   />
-                  <div className="flex gap-3 items-center md:hover:bg-[#F0F0F0] p-0 md:p-2 rounded-sm">
-                    <LogOut
-                      size={18}
-                      strokeWidth={1.25}
-                      className="hidden md:block"
-                    />
-                    <p className="cursor-pointer" onClick={handleLogout}>
-                      Logout
-                    </p>
-                  </div>
+                  <p className="cursor-pointer" onClick={handleLogout}>
+                    Logout
+                  </p>
                 </>
               ) : (
                 <Link href="/login">Login</Link>

@@ -31,7 +31,7 @@ export const generateMetadata = async ({ params }: any) => {
 
 const PostDetails = async ({ params }: any) => {
   const post = await getPost(params.id);
-  const { title, image, content, author, createdAt } = post.post;
+  const { title, image, content, author, createdAt, updatedAt } = post.post;
   const cookieStore = cookies();
   const token = cookieStore.get("blogAppToken");
   const decodedToken = token ? decodeToken(token.value) : null;
@@ -47,7 +47,10 @@ const PostDetails = async ({ params }: any) => {
               </Suspense>
             )}
             <p className="text-sm sm:text-lg">
-              Created at: {moment(createdAt).format("MMMM DD, YYYY")}
+              {" "}
+              {createdAt !== updatedAt
+                ? `Updated at: ${moment(updatedAt).format("MMMM DD, YYYY")}`
+                : `Created at: ${moment(createdAt).format("MMMM DD, YYYY")}`}
             </p>
           </div>
           {token && decodedToken.id === author && (
@@ -56,7 +59,7 @@ const PostDetails = async ({ params }: any) => {
         </div>
 
         {image && (
-          <div className="w-full h-[425px] relative">
+          <div className="w-full h-[280px] sm:h-[425px] relative">
             <Image src={image} alt={title} layout="fill" />
           </div>
         )}

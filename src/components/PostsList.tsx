@@ -26,9 +26,12 @@ const PostsList = async ({ simplified, author }: PostsListProps) => {
     displayedPosts = posts?.posts?.filter(
       (post: { author: string }) => post.author === author
     );
+  } else if (simplified) {
+    displayedPosts = posts?.posts?.slice(0, 6);
   } else {
     displayedPosts = posts?.posts || [];
   }
+
   return (
     <div className="flex flex-wrap gap-4 md:gap-2 lg:gap-5 justify-center lg:justify-start">
       {displayedPosts.map((post: PostCardProps) => (

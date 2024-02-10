@@ -60,7 +60,7 @@ const CreatePost = () => {
         ...formData,
         author: authorId,
       });
-      const res = await axios.post("/api/posts/newPost", {
+      const res = await axios.post("/api/posts/newPosts", {
         ...formData,
         author: authorId,
       });
@@ -74,8 +74,9 @@ const CreatePost = () => {
         description: res.data.message,
       });
     } catch (error: any) {
+      console.log(error);
       toast({
-        description: error.response.data.error,
+        description: error.response.data.error || "Something went wrong!",
       });
     } finally {
       setIsLoading(false);
