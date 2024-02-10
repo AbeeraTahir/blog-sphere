@@ -60,7 +60,7 @@ const CreatePost = () => {
         ...formData,
         author: authorId,
       });
-      const res = await axios.post("/api/posts/newPosts", {
+      const res = await axios.post("/api/posts/newPost", {
         ...formData,
         author: authorId,
       });
