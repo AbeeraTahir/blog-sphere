@@ -13,8 +13,31 @@ body {
   font-family: var(--font-poppins);
 }
 
-.grid-responsive {
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+.active {
+  font-weight: 600;
+  border-bottom: 2px solid black;
+  transition: all 0.5s ease;
+}
+
+.on_hover:hover {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu {
+  width: 70%;
+  height: 100%;
+  position: fixed;
+  top: 55px;
+  right: -100%;
+  z-index: 20;
+  padding: 32px;
+  background-color: #f8f8f8;
+  transition: all 0.5s ease;
+}
+
+.mobile-menu.mobile-menu-show {
+  right: 0;
 }
 
 @layer base {

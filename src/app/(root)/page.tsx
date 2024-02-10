@@ -1,13 +1,13 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import PostsList from "@/components/PostsList";
 import Link from "next/link";
+import { ChevronRight, Newspaper } from "lucide-react";
+import Wrapper from "@/components/Wrapper";
 
 export default function Home() {
   return (
-    <div className="px-5 md:px-28 flex flex-col">
-      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 pt-20 sm:pt-10">
+    <Wrapper>
+      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 mt-[-4.5rem] sm:mt-[-7rem] px-2">
         <h1 className="font-extrabold text-3xl sm:text-5xl">
           Connect Through Stories
         </h1>
@@ -16,22 +16,29 @@ export default function Home() {
           Join a community where stories fuel dialogue and inspiration ignites
           connection
         </h2>
-        <div className="flex sm:flex-row flex-col items-center gap-4 mt-3">
-          <Button variant={"outline"} className="w-36">
-            Read Stories
+        <Link href="/posts">
+          <Button className="w-36 flex gap-2">
+            <span>
+              <Newspaper size={18} strokeWidth={1.25} />
+            </span>
+            <span>Read Stories</span>
           </Button>
-          <Button className="w-36">Start Writing</Button>
-        </div>
+        </Link>
       </div>
-      <h2 className="font-[600] text-3xl sm:text-4xl mb-10">
+      <h2 className="font-[600] text-center lg:text-start text-3xl sm:text-4xl mb-10">
         Latest Blog Posts:
       </h2>
       <PostsList simplified />
-      <div className="border ml-auto my-12">
+      <div className="mx-auto sm:ml-auto my-12">
         <Link href="/posts">
-          <Button>View All Posts</Button>
+          <Button className="flex gap-2 items-center">
+            <span>View All Posts</span>
+            <span>
+              <ChevronRight size={20} strokeWidth={2} />
+            </span>
+          </Button>
         </Link>
       </div>
-    </div>
+    </Wrapper>
   );
 }

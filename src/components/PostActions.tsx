@@ -27,7 +27,7 @@ const PostActions = ({ postId, authorId }: PostActionsProps) => {
       });
     } catch (error: any) {
       toast({
-        description: error.response.data.error,
+        description: error.response.data.error || "Something went wrong!",
       });
     } finally {
       setIsLoading(false);

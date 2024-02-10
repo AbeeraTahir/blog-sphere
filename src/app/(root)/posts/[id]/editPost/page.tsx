@@ -70,13 +70,13 @@ const EditPost = ({ params }: any) => {
         image: "",
         content: "",
       });
-      router.push(`/${authorId}`);
+      router.push(`/posts/${params.id}`);
       toast({
         description: res.data.message,
       });
     } catch (error: any) {
       toast({
-        description: error.response.data.error,
+        description: error.response.data.error || "Something went wrong!",
       });
     } finally {
       setIsLoading(false);
