@@ -29,7 +29,7 @@ export default function Home() {
         Latest Blog Posts:
       </h2>
       <PostsList simplified />
-      <div className="border ml-auto my-12">
+      <div className="mx-auto sm:ml-auto my-12">
         <Link href="/posts">
           <Button className="flex gap-2 items-center">
             <span>View All Posts</span>
