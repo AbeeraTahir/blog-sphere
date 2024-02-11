@@ -23,6 +23,7 @@ import {
   LoginValidator,
 } from "@/lib/validators/authValidator";
 import Link from "next/link";
+import { LogIn, Undo2 } from "lucide-react";
 
 const Login = () => {
   const {
@@ -100,8 +101,19 @@ const Login = () => {
             )}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button className="w-full">
+        <CardFooter className="flex justify-between">
+          <Link href="/">
+            <Button variant="outline" className="w-24 flex gap-3">
+              <span>
+                <Undo2 size={18} strokeWidth={2} />
+              </span>
+              <span>Home</span>
+            </Button>
+          </Link>
+          <Button className="w-24 flex gap-3 items-center">
+            <span>
+              <LogIn size={18} strokeWidth={2} />
+            </span>
             {isLoading ? (
               <ReloadIcon className="h-4 w-4 animate-spin" />
             ) : (
