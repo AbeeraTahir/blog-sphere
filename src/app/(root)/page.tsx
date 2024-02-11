@@ -7,7 +7,7 @@ import Wrapper from "@/components/Wrapper";
 export default function Home() {
   return (
     <Wrapper>
-      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 mt-[-4.5rem] sm:mt-[-7rem] px-2">
+      <div className="h-screen flex justify-center items-center text-center flex-col gap-6 mt-[-7rem] sm:mt-[-7rem] px-2">
         <h1 className="font-extrabold text-3xl sm:text-5xl">
           Connect Through Stories
         </h1>
