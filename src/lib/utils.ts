@@ -11,7 +11,6 @@ export interface PostCardProps {
   content: string;
   image: string;
   author: string;
-  category: string;
 }
 
 export interface Params {

@@ -49,7 +49,7 @@ const PostDetails = async ({ params }: any) => {
                 <PostAuthor authorId={author} />
               </Suspense>
             )}
-            <p className="text-sm sm:text-lg">
+            <p className="text-sm sm:text-[0.95rem]">
               {" "}
               {createdAt !== updatedAt
                 ? `Updated at: ${moment(updatedAt).format("MMMM DD, YYYY")}`
