@@ -42,7 +42,6 @@ const PostsList = async ({ simplified, author }: PostsListProps) => {
           content={post.content}
           image={post.image}
           author={post.author}
-          category={post.category}
         />
       ))}
     </div>

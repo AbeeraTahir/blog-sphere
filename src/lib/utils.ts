@@ -10,8 +10,7 @@ export interface PostCardProps {
   title: string;
   content: string;
   image: string;
-  author: string;
-  category: string;
+  author?: string;
 }
 
 export interface Params {

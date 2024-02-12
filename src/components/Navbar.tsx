@@ -33,7 +33,7 @@ interface DropDownItemProps {
 const DropdownItem = ({ icon, link, label, onClick }: DropDownItemProps) => {
   return (
     <Link href={link}>
-      <div className="flex gap-4 md:gap-3 items-center md:hover:bg-[#F0F0F0] p-0 md:p-2 md:rounded-sm">
+      <div className="flex gap-4 md:gap-3 items-center md:hover:bg-[#F0F0F0] md:hover:font-normal hover:font-[600] p-0 md:p-2 md:rounded-sm">
         {icon && React.createElement(icon, { size: 18, strokeWidth: 1.25 })}
         <p onClick={onClick}>{label}</p>
       </div>
@@ -114,12 +114,16 @@ const Navbar = () => {
                     label="Write post"
                     onClick={toggleMenuBar}
                   />
-                  <p className="cursor-pointer" onClick={handleLogout}>
+                  <p
+                    className="cursor-pointer hover:font-[600]"
+                    onClick={handleLogout}>
                     Logout
                   </p>
                 </>
               ) : (
-                <Link href="/login">Login</Link>
+                <Link href="/login" className="hover:font-[600]">
+                  Login
+                </Link>
               )}
             </div>
           )}
@@ -154,7 +158,9 @@ const Navbar = () => {
                   />
                   <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-2 rounded-sm">
                     <LogOut size={18} strokeWidth={1.25} />
-                    <p className="cursor-pointer" onClick={handleLogout}>
+                    <p
+                      className="cursor-pointer hover:font-[600] md:hover:font-normal"
+                      onClick={handleLogout}>
                       Logout
                     </p>
                   </div>
