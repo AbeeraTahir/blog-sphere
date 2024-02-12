@@ -14,7 +14,7 @@ const PostCard = ({ _id, title, content, image, author }: PostCardProps) => {
         <div className="flex flex-col gap-3">
           <h2 className="font-[600] text-lg sm:text-xl">{title}</h2>
           <Suspense fallback={<div>Loading...</div>}>
-            <PostAuthor authorId={author} />{" "}
+            <PostAuthor authorId={author!} />{" "}
           </Suspense>
         </div>
         <div className="w-full h-[175px] relative overflow-hidden">
@@ -28,14 +28,13 @@ const PostCard = ({ _id, title, content, image, author }: PostCardProps) => {
         </div>
         <p className="text-[0.9rem]">
           {content.split(" ").length > 15
-            ? content.split(" ").slice(0, 15).join(" ")
-            : content}{" "}
-          ...
+            ? `${content.split(" ").slice(0, 15).join(" ")}...`
+            : content}
         </p>
         <div className="ml-auto mt-auto">
           <Link href={`/posts/${_id}`}>
             <Button variant={"secondary"} className="flex gap-2 items-center">
-              <span>Read Full Post</span>
+              <span>View Post</span>
               <span>
                 <ChevronRight size={20} strokeWidth={2} />
               </span>

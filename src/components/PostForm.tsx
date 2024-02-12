@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Wrapper from "./Wrapper";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -106,13 +107,26 @@ const PostForm = ({ edittablePost }: PostFormProps) => {
           />
         </div>
         <div className="flex flex-col items-start gap-2">
-          <label htmlFor="image">Post Image:</label>
-          <input
-            type="file"
-            name="image"
-            onChange={handleChange}
-            placeholder="Enter Post Image"
-          />
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col items-start gap-2 bordere">
+              <label htmlFor="image">Post Image:</label>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleChange}
+                placeholder="Enter Post Image"
+              />
+            </div>
+            {formData.image && (
+              <Image
+                src={formData.image}
+                alt="post image"
+                width={300}
+                height={300}
+              />
+            )}
+          </div>
         </div>
         <div className="flex flex-col items-start gap-2">
           <label htmlFor="content">Post Content:</label>
