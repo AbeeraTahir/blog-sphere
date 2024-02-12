@@ -19,7 +19,7 @@ const PostCard = ({ _id, title, content, image, author }: PostCardProps) => {
         </div>
         <div className="w-full h-[175px] relative overflow-hidden">
           <Image
-            src={image}
+            src={image ? image : "/dummyPostImage.jpg"}
             alt={title}
             layout="fill"
             sizes="(max-width: 360px) 100vw"

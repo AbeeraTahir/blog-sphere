@@ -40,7 +40,7 @@ const PostDetails = async ({ params }: any) => {
   const decodedToken = token ? decodeToken(token.value) : null;
   return (
     <Wrapper>
-      <div className="w-[90%] md:w-[75%] lg:w-[60%] mx-auto flex flex-col gap-8">
+      <div className="w-[90%] md:w-[75%] lg:w-[60%] mx-auto flex flex-col gap-5 sm:gap-8">
         <h2 className="font-[600] text:xl md:text-3xl">{title}</h2>
         <div className="flex flex-col md:flex-row items-start gap-5 md:items-center justify-between">
           <div className="flex flex-col gap-2">
@@ -66,7 +66,9 @@ const PostDetails = async ({ params }: any) => {
             <Image src={image} alt={title} layout="fill" />
           </div>
         )}
-        <p className="text-sm sm:text-lg">{content}</p>
+        <p className="text-sm sm:text-[1rem] leading-6 sm:leading-7">
+          {content}
+        </p>
       </div>
     </Wrapper>
   );
