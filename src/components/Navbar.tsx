@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/lib/redux/store";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "./ui/button";
@@ -18,8 +16,12 @@ import {
   LucideIcon,
 } from "lucide-react";
 import NavItems from "./NavItems";
-import { AnyAction } from "@reduxjs/toolkit";
-import { getUserData, logout } from "@/lib/redux/features/authSlice";
+
+interface UserData {
+  _id: string;
+  full_name: string;
+  email: string;
+}
 
 interface DropDownItemProps {
   icon?: LucideIcon;
@@ -42,21 +44,17 @@ const DropdownItem = ({ icon, link, label, onClick }: DropDownItemProps) => {
 const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const dispatch = useDispatch();
-  const user = useAppSelector((state) => state.auth.user);
+  const [user, setUser] = useState<UserData | null>(null);
   const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
-    const getLoggedInUser = async () => {
-      try {
-        await dispatch(getUserData() as unknown as AnyAction);
-      } catch (error) {
-        throw new Error("Error fetching user");
-      }
+    const getUserDetails = async () => {
+      const res = await axios.get("/api/user");
+      setUser(res.data.data);
     };
-    void getLoggedInUser();
-  }, [dispatch]);
+    void getUserDetails();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -66,7 +64,7 @@ const Navbar = () => {
       toast({
         description: res.data.message,
       });
-      dispatch(logout());
+      setUser(null);
       router.push("/");
     } catch (error: any) {
       console.log(error);

@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ReduxProvider } from "@/lib/redux/provider";
 
 export default function RootLayout({
   children,
@@ -9,11 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <div className="flex h-screen flex-col">
-      <ReduxProvider>
-        <Navbar />
-        {children}
-        <Footer />
-      </ReduxProvider>
+      <Navbar />
+      {children}
+      <Footer />
     </div>
   );
 }
