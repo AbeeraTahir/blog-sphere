@@ -78,7 +78,7 @@ const PostForm = ({ edittablePost }: PostFormProps) => {
           image: "",
           content: "",
         });
-        router.push(`/${authorId}`);
+        router.push(`/posts/myPosts/${authorId}`);
       }
       toast({
         description: res.data.message,

@@ -105,12 +105,12 @@ const Navbar = () => {
               {user ? (
                 <>
                   <DropdownItem
-                    link={`/${user._id}`}
+                    link={`/posts/myPosts/${user._id}`}
                     label="My posts"
                     onClick={toggleMenuBar}
                   />
                   <DropdownItem
-                    link="/createPost"
+                    link="/posts/createPost"
                     label="Write post"
                     onClick={toggleMenuBar}
                   />
@@ -146,13 +146,13 @@ const Navbar = () => {
                 <div className="absolute top-7 w-36 p-1 bg-[#f8f8f8] rounded-md shadow-md flex flex-col gap-1 text-sm">
                   <DropdownItem
                     icon={Newspaper}
-                    link={`/${user._id}`}
+                    link={`/posts/myPosts/${user._id}`}
                     label="My posts"
                     onClick={toggleDropDown}
                   />
                   <DropdownItem
                     icon={SquarePen}
-                    link="/createPost"
+                    link="/posts/createPost"
                     label="Write post"
                     onClick={toggleDropDown}
                   />

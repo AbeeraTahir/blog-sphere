@@ -21,7 +21,7 @@ const PostActions = ({ postId, authorId }: PostActionsProps) => {
     try {
       setIsLoading(true);
       const res = await axios.delete(`/api/posts/${postId}`);
-      router.push(`/${authorId}`);
+      router.push(`/posts/myPosts/${authorId}`);
       toast({
         description: res.data.message,
       });
