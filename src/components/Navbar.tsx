@@ -112,7 +112,7 @@ const Navbar = () => {
                     onClick={toggleMenuBar}
                   />
                   <DropdownItem
-                    link="/createPost"
+                    link="/posts/createPost"
                     label="Write post"
                     onClick={toggleMenuBar}
                   />
@@ -154,7 +154,7 @@ const Navbar = () => {
                   />
                   <DropdownItem
                     icon={SquarePen}
-                    link="/createPost"
+                    link="/posts/createPost"
                     label="Write post"
                     onClick={toggleDropDown}
                   />

@@ -6,8 +6,6 @@ import { connect } from "@/lib/database/dbConnection";
 
 connect();
 
-export const dynamic = "force-dynamic";
-
 export async function GET(request: NextRequest) {
   try {
     const userId = await getDataFromToken(request);
