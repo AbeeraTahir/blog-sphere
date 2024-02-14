@@ -8,7 +8,7 @@ import { decodeToken } from "@/lib/helpers/getDataFromToken";
 import Wrapper from "@/components/Wrapper";
 import PostActions from "@/components/PostActions";
 
-const getPost = async (postId: string) => {
+export const getPost = async (postId: string) => {
   const res = await fetch(
     `https://blog-sphere-one.vercel.app/api/posts/${postId}`,
     {

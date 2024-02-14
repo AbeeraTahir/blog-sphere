@@ -69,8 +69,16 @@ const PostForm = ({ edittablePost }: PostFormProps) => {
       let res;
       const post = { ...formData, author: authorId };
       if (edittablePost) {
-        res = await axios.put(`/api/posts/${edittablePost._id}`, post);
-        router.push(`/posts/${edittablePost._id}`);
+        if (edittablePost.author !== authorId) {
+          toast({
+            description: "Invalid author",
+          });
+          setIsLoading(false);
+          return;
+        } else {
+          res = await axios.put(`/api/posts/${edittablePost._id}`, post);
+          router.push(`/posts/${edittablePost._id}`);
+        }
       } else {
         res = await axios.post("/api/posts/newPost", post);
         setFormData({
@@ -81,7 +89,7 @@ const PostForm = ({ edittablePost }: PostFormProps) => {
         router.push(`/${authorId}`);
       }
       toast({
-        description: res.data.message,
+        description: res?.data.message,
       });
     } catch (error: any) {
       console.log(error);

@@ -43,7 +43,7 @@ const Hero = () => {
             <span>Read Stories</span>
           </Button>
         </Link>
-        <Link href={user ? "/createPost" : "/login"}>
+        <Link href={user ? "/posts/createPost" : "/login"}>
           <Button className="w-36 flex gap-2">
             <span>
               <SquarePen size={18} strokeWidth={1.25} />
