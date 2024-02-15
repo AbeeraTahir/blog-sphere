@@ -7,6 +7,7 @@ import PostAuthor from "@/components/PostAuthor";
 import { decodeToken } from "@/lib/helpers/getDataFromToken";
 import Wrapper from "@/components/Wrapper";
 import PostActions from "@/components/PostActions";
+import Comments from "@/components/Comments";
 
 const getPost = async (postId: string) => {
   const res = await fetch(
@@ -41,7 +42,7 @@ const PostDetails = async ({ params }: any) => {
   return (
     <Wrapper>
       <div className="w-[90%] md:w-[75%] lg:w-[60%] mx-auto flex flex-col gap-5 sm:gap-8">
-        <h2 className="font-[600] text:xl md:text-3xl">{title}</h2>
+        <h2 className="font-[600] text-xl md:text-3xl">{title}</h2>
         <div className="flex flex-col md:flex-row items-start gap-5 md:items-center justify-between">
           <div className="flex flex-col gap-2">
             {post && (
@@ -69,6 +70,7 @@ const PostDetails = async ({ params }: any) => {
         <p className="text-sm sm:text-[1rem] leading-6 sm:leading-7">
           {content}
         </p>
+        <Comments postId={params.id} />
       </div>
     </Wrapper>
   );
