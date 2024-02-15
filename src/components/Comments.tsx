@@ -41,7 +41,7 @@ const Comments = ({ postId }: CommentsProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="font-[600] text-xl md:text-3xl">
+      <h2 className="font-[600] text-xl md:text-2xl">
         Comments ({commentsCount})
       </h2>
     </div>
