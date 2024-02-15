@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Newspaper, SquarePen } from "lucide-react";
-import { UserData } from "@/lib/utils";
 import { useAppSelector } from "@/lib/redux/store";
 import { useDispatch } from "react-redux";
 import { getUserData } from "@/lib/redux/features/authSlice";
