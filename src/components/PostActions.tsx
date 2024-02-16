@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -8,6 +8,10 @@ import { Params } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useAppSelector } from "@/lib/redux/store";
+import { useDispatch } from "react-redux";
+import { getUserData } from "@/lib/redux/features/authSlice";
+import { AnyAction } from "@reduxjs/toolkit";
 
 interface PostActionsProps extends Params {
   authorId: string;
@@ -15,8 +19,22 @@ interface PostActionsProps extends Params {
 
 const PostActions = ({ postId, authorId }: PostActionsProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.user);
   const router = useRouter();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const getLoggedInUser = async () => {
+      try {
+        await dispatch(getUserData() as unknown as AnyAction);
+      } catch (error) {
+        throw new Error("Error fetching user");
+      }
+    };
+    void getLoggedInUser();
+  }, [dispatch]);
+
   const deletePost = async (postId: string) => {
     try {
       setIsLoading(true);
@@ -34,14 +52,22 @@ const PostActions = ({ postId, authorId }: PostActionsProps) => {
     }
   };
   return (
-    <div className="flex gap-3">
-      <Link href={`/posts/${postId}/editPost`}>
-        <Button variant={"secondary"}>Edit</Button>
-      </Link>
-      <Button variant={"secondary"} onClick={() => deletePost(postId)}>
-        {isLoading ? <ReloadIcon className="h-4 w-4 animate-spin" /> : "Delete"}
-      </Button>
-    </div>
+    <>
+      {user?._id === authorId && (
+        <div className="flex gap-3">
+          <Link href={`/posts/${postId}/editPost`}>
+            <Button variant={"secondary"}>Edit</Button>
+          </Link>
+          <Button variant={"secondary"} onClick={() => deletePost(postId)}>
+            {isLoading ? (
+              <ReloadIcon className="h-4 w-4 animate-spin" />
+            ) : (
+              "Delete"
+            )}
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 

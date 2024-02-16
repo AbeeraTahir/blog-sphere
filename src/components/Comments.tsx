@@ -1,69 +1,50 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-import { Button } from "./ui/button";
-import { useAppSelector } from "@/lib/redux/store";
-import { useDispatch } from "react-redux";
-import { getUserData } from "@/lib/redux/features/authSlice";
-import axios from "axios";
-import { ClipLoader } from "react-spinners";
+import React, { Suspense } from "react";
 import CommentForm from "./CommentForm";
-import { AnyAction } from "@reduxjs/toolkit";
-
-interface CommentTypes {
-  _id: string;
-  post: string;
-  author: string;
-  content: string;
-}
+import Author from "./Author";
 
 interface CommentsProps {
   postId: string;
 }
 
-const Comments = ({ postId }: CommentsProps) => {
-  const [commentsCount, setCommentsCount] = useState<number>(0);
-  const [comments, setComments] = useState<CommentTypes[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const dispatch = useDispatch();
-  const user = useAppSelector((state) => state.auth.user);
+interface CommentTypes {
+  _id: string;
+  content: string;
+  author: string;
+  post: string;
+  createdAt: string;
+}
 
-  useEffect(() => {
-    const getLoggedInUser = async () => {
-      try {
-        await dispatch(getUserData() as unknown as AnyAction);
-      } catch (error) {
-        throw new Error("Error fetching user");
-      }
-    };
-    void getLoggedInUser();
-  }, [dispatch]);
+const getComments = async (postId: string) => {
+  const res = await fetch(
+    `http://localhost:3000/api/posts/${postId}/comments`,
+    {
+      cache: "no-store",
+    }
+  );
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        setIsLoading(true);
-        const res = await axios.get(
-          `http://localhost:3000/api/posts/${postId}/comments`
-        );
-        setComments(res.data.comments);
-        setCommentsCount(res.data.comments.length);
-        console.log(res.data.comments);
-      } catch (error: any) {
-        throw new Error("Something went wrong", error.response.data.error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchComments();
-  }, [postId]);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
 
+  return res.json();
+};
+
+const Comments = async ({ postId }: CommentsProps) => {
+  const comments = await getComments(postId);
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-[600] text-xl md:text-2xl">
-        Comments ({commentsCount})
+        Comments ({comments?.length})
       </h2>
-      <CommentForm user={user} postId={postId} />
+      <CommentForm postId={postId} />
+      {comments?.map(({ _id, content, author, createdAt }: CommentTypes) => (
+        <div key={_id} className="flex flex-col gap-1">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Author commentAuthor authorId={author} />
+          </Suspense>
+          <p className="text-sm sm:text-[1rem]">{content}</p>
+        </div>
+      ))}
     </div>
   );
 };

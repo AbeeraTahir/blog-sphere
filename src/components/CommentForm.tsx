@@ -7,13 +7,19 @@ import { Button } from "./ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import axios from "axios";
+import { useAppSelector } from "@/lib/redux/store";
+import { useDispatch } from "react-redux";
+import { getUserData } from "@/lib/redux/features/authSlice";
+import { useRouter } from "next/navigation";
 
 interface CommentFormProps {
-  user: UserData | null;
   postId: string;
 }
 
-const CommentForm = ({ user, postId }: CommentFormProps) => {
+const CommentForm = ({ postId }: CommentFormProps) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.user);
   const [comment, setComment] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
@@ -35,6 +41,7 @@ const CommentForm = ({ user, postId }: CommentFormProps) => {
         toast({
           description: res.data.message,
         });
+        router.refresh();
         setComment("");
       }
     } catch (error: any) {

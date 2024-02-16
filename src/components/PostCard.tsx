@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PostCardProps } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-import PostAuthor from "./PostAuthor";
+import Author from "./Author";
 
 const PostCard = ({ _id, title, content, image, author }: PostCardProps) => {
   return (
@@ -14,7 +14,7 @@ const PostCard = ({ _id, title, content, image, author }: PostCardProps) => {
         <div className="flex flex-col gap-3">
           <h2 className="font-[600] text-lg sm:text-xl">{title}</h2>
           <Suspense fallback={<div>Loading...</div>}>
-            <PostAuthor authorId={author!} />{" "}
+            <Author authorId={author!} />{" "}
           </Suspense>
         </div>
         <div className="w-full h-[175px] relative overflow-hidden">
