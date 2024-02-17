@@ -11,9 +11,7 @@ const Author = async ({ authorId, commentAuthor }: AuthorProps) => {
   return (
     <>
       {commentAuthor ? (
-        <h2 className="text-sm sm:text-[0.95rem] font-[600]">
-          {user.full_name}
-        </h2>
+        <h2 className="text-sm sm:text-[1rem] font-[600]">{user.full_name}</h2>
       ) : (
         <p className="text-sm sm:text-[0.95rem]">Author: {user.full_name}</p>
       )}

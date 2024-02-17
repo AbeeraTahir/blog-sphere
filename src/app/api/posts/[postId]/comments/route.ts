@@ -11,7 +11,9 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
   const { postId } = params;
 
   try {
-    const comments = await Comment.find({ post: postId });
+    const comments = await Comment.find({ post: postId }).sort({
+      createdAt: -1,
+    });
     return NextResponse.json(comments, { status: 200 });
   } catch (err) {
     console.log(err);
