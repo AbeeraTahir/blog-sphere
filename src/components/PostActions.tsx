@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -9,31 +9,13 @@ import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAppSelector } from "@/lib/redux/store";
-import { useDispatch } from "react-redux";
-import { getUserData } from "@/lib/redux/features/authSlice";
-import { AnyAction } from "@reduxjs/toolkit";
+import { ActionsProps } from "@/lib/utils";
 
-interface PostActionsProps extends Params {
-  authorId: string;
-}
-
-const PostActions = ({ postId, authorId }: PostActionsProps) => {
+const PostActions = ({ postId, authorId }: ActionsProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const dispatch = useDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const router = useRouter();
   const { toast } = useToast();
-
-  useEffect(() => {
-    const getLoggedInUser = async () => {
-      try {
-        await dispatch(getUserData() as unknown as AnyAction);
-      } catch (error) {
-        throw new Error("Error fetching user");
-      }
-    };
-    void getLoggedInUser();
-  }, [dispatch]);
 
   const deletePost = async (postId: string) => {
     try {
@@ -58,7 +40,7 @@ const PostActions = ({ postId, authorId }: PostActionsProps) => {
           <Link href={`/posts/${postId}/editPost`}>
             <Button variant={"secondary"}>Edit</Button>
           </Link>
-          <Button variant={"secondary"} onClick={() => deletePost(postId)}>
+          <Button variant={"secondary"} onClick={() => deletePost(postId!)}>
             {isLoading ? (
               <ReloadIcon className="h-4 w-4 animate-spin" />
             ) : (

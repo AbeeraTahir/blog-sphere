@@ -4,6 +4,7 @@ import Author from "./Author";
 import { Separator } from "./ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import moment from "moment";
+import CommentActions from "./CommentActions";
 
 interface CommentsProps {
   postId: string;
@@ -57,6 +58,7 @@ const Comments = async ({ postId }: CommentsProps) => {
             </p>
           </div>
           <p className="text-sm sm:text-[0.95rem] mb-1 ml-11">{content}</p>
+          <CommentActions authorId={author} />
           <Separator />
         </div>
       ))}
