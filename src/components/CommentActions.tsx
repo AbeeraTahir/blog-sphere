@@ -88,7 +88,7 @@ const CommentActions = ({
                 "Edit"
               )}
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="w-[90%]">
               <DialogHeader>
                 <DialogTitle>Edit Comment</DialogTitle>
                 <DialogDescription>
