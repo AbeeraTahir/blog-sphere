@@ -5,10 +5,7 @@ import { Separator } from "./ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import moment from "moment";
 import CommentActions from "./CommentActions";
-
-interface CommentsProps {
-  postId: string;
-}
+import { Params } from "@/lib/utils";
 
 interface CommentTypes {
   _id: string;
@@ -33,8 +30,8 @@ const getComments = async (postId: string) => {
   return res.json();
 };
 
-const Comments = async ({ postId }: CommentsProps) => {
-  const comments = await getComments(postId);
+const Comments = async ({ postId }: Params) => {
+  const comments = await getComments(postId!);
   return (
     <div className="flex flex-col gap-4 sm:gap-5">
       <h2 className="font-[600] text-xl md:text-2xl">
@@ -58,7 +55,12 @@ const Comments = async ({ postId }: CommentsProps) => {
             </p>
           </div>
           <p className="text-sm sm:text-[0.95rem] mb-1 ml-11">{content}</p>
-          <CommentActions authorId={author} />
+          <CommentActions
+            comment={content}
+            authorId={author}
+            postId={postId}
+            commentId={_id}
+          />
           <Separator />
         </div>
       ))}

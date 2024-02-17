@@ -9,14 +9,10 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useAppSelector } from "@/lib/redux/store";
 import { useDispatch } from "react-redux";
-import { getUserData } from "@/lib/redux/features/authSlice";
 import { useRouter } from "next/navigation";
+import { Params } from "@/lib/utils";
 
-interface CommentFormProps {
-  postId: string;
-}
-
-const CommentForm = ({ postId }: CommentFormProps) => {
+const CommentForm = ({ postId }: Params) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.auth.user);
