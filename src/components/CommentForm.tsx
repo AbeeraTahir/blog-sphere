@@ -11,11 +11,12 @@ import { useAppSelector } from "@/lib/redux/store";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Params } from "@/lib/utils";
+import { ClipLoader } from "react-spinners";
 
 const CommentForm = ({ postId }: Params) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useAppSelector((state) => state.auth.user);
+  const { loading, user } = useAppSelector((state) => state.auth);
   const [comment, setComment] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
@@ -63,14 +64,20 @@ const CommentForm = ({ postId }: Params) => {
         <Button className="w-20" disabled={user ? false : true}>
           {isLoading ? <ReloadIcon className="h-4 w-4 animate-spin" /> : "Post"}
         </Button>
-        {!user && (
-          <p className="text-[0.75rem] sm:text-[0.95rem] italic">
-            Please{" "}
-            <Link href="/login" className="text-blue-500 underline">
-              Login
-            </Link>{" "}
-            to add a comment!
-          </p>
+        {loading ? (
+          <ClipLoader color="#000" className="w-4 h-4" />
+        ) : (
+          <>
+            {!user && (
+              <p className="text-[0.75rem] sm:text-[0.95rem] italic">
+                Please{" "}
+                <Link href="/login" className="text-blue-500 underline">
+                  Login{" "}
+                </Link>
+                to add a comment!
+              </p>
+            )}
+          </>
         )}
       </div>
     </form>

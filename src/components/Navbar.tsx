@@ -20,6 +20,7 @@ import {
 import NavItems from "./NavItems";
 import { AnyAction } from "@reduxjs/toolkit";
 import { getUserData, logout } from "@/lib/redux/features/authSlice";
+import { ClipLoader } from "react-spinners";
 
 interface DropDownItemProps {
   icon?: LucideIcon;
@@ -43,7 +44,7 @@ const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const dispatch = useDispatch();
-  const user = useAppSelector((state) => state.auth.user);
+  const { loading, user } = useAppSelector((state) => state.auth);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -133,53 +134,59 @@ const Navbar = () => {
         <div className="md:flex items-center gap-8 h-8 hidden">
           <NavItems />
           <div className="border h-full" />
-          {user ? (
-            <div className="flex gap-2 relative">
-              <h2>{user.full_name}</h2>
-              <ChevronDown
-                size={18}
-                strokeWidth={1.25}
-                className={`mt-[0.25rem] cursor-pointer transition-transform transform duration-300 ease-in-out ${
-                  isDropDownOpen ? "rotate-180" : ""
-                }`}
-                onClick={toggleDropDown}
-              />
-              {isDropDownOpen && (
-                <div className="absolute top-7 w-36 p-1 bg-[#f8f8f8] rounded-md shadow-md flex flex-col gap-1 text-sm">
-                  <DropdownItem
-                    icon={Newspaper}
-                    link={`/${user._id}`}
-                    label="My posts"
+          {loading ? (
+            <ClipLoader color="#000" />
+          ) : (
+            <>
+              {user ? (
+                <div className="flex gap-2 relative">
+                  <h2>{user.full_name}</h2>
+                  <ChevronDown
+                    size={18}
+                    strokeWidth={1.25}
+                    className={`mt-[0.25rem] cursor-pointer transition-transform transform duration-300 ease-in-out ${
+                      isDropDownOpen ? "rotate-180" : ""
+                    }`}
                     onClick={toggleDropDown}
                   />
-                  <DropdownItem
-                    icon={SquarePen}
-                    link="/posts/createPost"
-                    label="Write post"
-                    onClick={toggleDropDown}
-                  />
-                  <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-2 rounded-sm">
-                    <LogOut size={18} strokeWidth={1.25} />
-                    <p
-                      className="cursor-pointer hover:font-[600] md:hover:font-normal"
-                      onClick={handleLogout}>
-                      Logout
-                    </p>
-                  </div>
+                  {isDropDownOpen && (
+                    <div className="absolute top-7 w-36 p-1 bg-[#f8f8f8] rounded-md shadow-md flex flex-col gap-1 text-sm">
+                      <DropdownItem
+                        icon={Newspaper}
+                        link={`/${user._id}`}
+                        label="My posts"
+                        onClick={toggleDropDown}
+                      />
+                      <DropdownItem
+                        icon={SquarePen}
+                        link="/posts/createPost"
+                        label="Write post"
+                        onClick={toggleDropDown}
+                      />
+                      <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-2 rounded-sm">
+                        <LogOut size={18} strokeWidth={1.25} />
+                        <p
+                          className="cursor-pointer hover:font-[600] md:hover:font-normal"
+                          onClick={handleLogout}>
+                          Logout
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="flex gap-5 items-center">
+                  <Link href="/login">
+                    <Button variant={"outline"} className="w-20">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button className="w-20">Signup</Button>
+                  </Link>
                 </div>
               )}
-            </div>
-          ) : (
-            <div className="flex gap-5 items-center">
-              <Link href="/login">
-                <Button variant={"outline"} className="w-20">
-                  Login
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button className="w-20">Signup</Button>
-              </Link>
-            </div>
+            </>
           )}
         </div>
       </nav>
