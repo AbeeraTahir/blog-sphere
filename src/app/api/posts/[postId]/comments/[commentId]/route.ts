@@ -10,7 +10,7 @@ export async function PUT(req: NextRequest, { params }: { params: Params }) {
     const { commentId } = params;
 
     const body = await req.json();
-    const commentData = body.formData;
+    const commentData = body;
 
     await Comment.findByIdAndUpdate(commentId, {
       ...commentData,

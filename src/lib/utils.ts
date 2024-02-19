@@ -24,6 +24,10 @@ export interface PostCardProps {
 }
 
 export interface Params {
-  postId: string;
+  postId?: string;
   commentId?: string;
+}
+
+export interface ActionsProps extends Params {
+  authorId: string;
 }

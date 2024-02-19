@@ -1,12 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { cookies } from "next/headers";
 import { Suspense } from "react";
 import moment from "moment";
-import PostAuthor from "@/components/PostAuthor";
-import { decodeToken } from "@/lib/helpers/getDataFromToken";
+import Author from "@/components/Author";
 import Wrapper from "@/components/Wrapper";
 import PostActions from "@/components/PostActions";
+import Comments from "@/components/Comments";
 
 const getPost = async (postId: string) => {
   const res = await fetch(
@@ -35,18 +34,15 @@ export const generateMetadata = async ({ params }: any) => {
 const PostDetails = async ({ params }: any) => {
   const post = await getPost(params.id);
   const { title, image, content, author, createdAt, updatedAt } = post.post;
-  const cookieStore = cookies();
-  const token = cookieStore.get("blogAppToken");
-  const decodedToken = token ? decodeToken(token.value) : null;
   return (
     <Wrapper>
       <div className="w-[90%] md:w-[75%] lg:w-[60%] mx-auto flex flex-col gap-5 sm:gap-8">
-        <h2 className="font-[600] text:xl md:text-3xl">{title}</h2>
+        <h2 className="font-[600] text-xl md:text-3xl">{title}</h2>
         <div className="flex flex-col md:flex-row items-start gap-5 md:items-center justify-between">
           <div className="flex flex-col gap-2">
             {post && (
               <Suspense fallback={<div>Loading...</div>}>
-                <PostAuthor authorId={author} />
+                <Author authorId={author} />
               </Suspense>
             )}
             <p className="text-sm sm:text-[0.95rem]">
@@ -56,9 +52,7 @@ const PostDetails = async ({ params }: any) => {
                 : `Created at: ${moment(createdAt).format("MMMM DD, YYYY")}`}
             </p>
           </div>
-          {token && decodedToken.id === author && (
-            <PostActions postId={params.id} authorId={author} />
-          )}
+          <PostActions postId={params.id} authorId={author} />
         </div>
 
         {image && (
@@ -69,6 +63,7 @@ const PostDetails = async ({ params }: any) => {
         <p className="text-sm sm:text-[1rem] leading-6 sm:leading-7">
           {content}
         </p>
+        <Comments postId={params.id} />
       </div>
     </Wrapper>
   );
