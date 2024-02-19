@@ -17,7 +17,7 @@ interface CommentTypes {
 
 const getComments = async (postId: string) => {
   const res = await fetch(
-    `http://localhost:3000/api/posts/${postId}/comments`,
+    `https://blog-sphere-one.vercel.app/api/posts/${postId}/comments`,
     {
       cache: "no-store",
     }

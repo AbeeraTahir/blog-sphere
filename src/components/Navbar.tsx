@@ -68,7 +68,6 @@ const Navbar = () => {
         description: res.data.message,
       });
       dispatch(logout());
-      router.push("/");
     } catch (error: any) {
       console.log(error);
       toast({
@@ -163,11 +162,11 @@ const Navbar = () => {
                         label="Write post"
                         onClick={toggleDropDown}
                       />
-                      <div className="flex gap-3 items-center hover:bg-[#F0F0F0] p-2 rounded-sm">
+                      <div
+                        className="flex gap-3 items-center hover:bg-[#F0F0F0] p-2 rounded-sm cursor-pointer"
+                        onClick={handleLogout}>
                         <LogOut size={18} strokeWidth={1.25} />
-                        <p
-                          className="cursor-pointer hover:font-[600] md:hover:font-normal"
-                          onClick={handleLogout}>
+                        <p className="hover:font-[600] md:hover:font-normal">
                           Logout
                         </p>
                       </div>

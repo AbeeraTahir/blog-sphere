@@ -26,7 +26,7 @@ const PostCard = ({ _id, title, content, image, author }: PostCardProps) => {
             objectFit="cover"
           />
         </div>
-        <p className="text-[0.9rem]">
+        <p className="text-[0.9rem] whitespace-pre-line">
           {content.split(" ").length > 15
             ? `${content.split(" ").slice(0, 15).join(" ")}...`
             : content}
