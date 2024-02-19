@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { connect } from "@/lib/database/dbConnection";
 
+export const dynamic = "force-dynamic";
+
 connect();
 export async function GET() {
   try {
