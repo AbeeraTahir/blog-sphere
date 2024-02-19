@@ -118,6 +118,24 @@ const Signup = () => {
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
           </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="confirmPassword" className="ml-1">
+              Confirm Password:
+            </Label>
+            <Input
+              {...register("confirmPassword")}
+              className={
+                errors?.confirmPassword ? "focus-visible:ring-red-500" : ""
+              }
+              type="password"
+              placeholder="Confirm Password"
+            />
+            {errors?.confirmPassword && (
+              <p className="text-sm text-red-500">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
         </CardContent>
         <CardFooter className="flex justify-between">
           <Link href="/">

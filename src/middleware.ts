@@ -13,6 +13,10 @@ export function middleware(request: NextRequest) {
 
   const token = request.cookies.get("blogAppToken")?.value || "";
 
+  if ((path === "/login" || path === "/signup") && token) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
+
   if (!isPublicPath && !token) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }

@@ -2,20 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { UserData } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useAppSelector } from "@/lib/redux/store";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Params } from "@/lib/utils";
 import { ClipLoader } from "react-spinners";
 
 const CommentForm = ({ postId }: Params) => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const { loading, user } = useAppSelector((state) => state.auth);
   const [comment, setComment] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -1,28 +1,14 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Newspaper, SquarePen } from "lucide-react";
 import { useAppSelector } from "@/lib/redux/store";
-import { useDispatch } from "react-redux";
-import { getUserData } from "@/lib/redux/features/authSlice";
-import { AnyAction } from "@reduxjs/toolkit";
 
 const Hero = () => {
-  const dispatch = useDispatch();
   const user = useAppSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    const getLoggedInUser = async () => {
-      try {
-        await dispatch(getUserData() as unknown as AnyAction);
-      } catch (error) {
-        throw new Error("Error fetching user");
-      }
-    };
-    void getLoggedInUser();
-  }, [dispatch]);
   return (
     <div className="h-screen flex justify-center items-center text-center flex-col gap-6 mt-[-7rem] sm:mt-[-7rem] px-2">
       <h1 className="font-extrabold text-3xl sm:text-5xl">
