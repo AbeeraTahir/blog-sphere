@@ -22,7 +22,7 @@
 
 # 📖 BlogSphere <a name="blog-sphere"></a>
 
-**BlogSphere** is a full-stack blog website that allows users to create, read, update, and delete blog posts, as well as manage comments on those posts. Built with Nextjs, which allows faster page load due to server-side rendering and better SEO, TypeScript, and MongoDB. With its seamless user experience, BlogSphere empowers users to share their thoughts and ideas with the world effortlessly.
+**BlogSphere** is a full-stack blog website that allows users to create, read, update, and delete blog posts, as well as manage comments on those posts. Built with Nextjs, which allows faster page load due to server-side rendering and better SEO, Redux Toolkit, TypeScript, and MongoDB. With its seamless user experience, BlogSphere empowers users to share their thoughts and ideas with the world effortlessly.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -32,6 +32,7 @@
   <summary>Front-End</summary>
   <ul>
     <li><a href="https://nextjs.org/">Nextjs</a></li>
+    <li><a href="https://redux-toolkit.js.org/">Redux Toolkit</a></li>
     <li><a href="https://www.typescriptlang.org/">TypeScript</a></li>
     <li><a href="https://ui.shadcn.com/">Shadcn</a></li>
     <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
