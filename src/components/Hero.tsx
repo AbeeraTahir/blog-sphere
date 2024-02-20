@@ -12,7 +12,7 @@ const Hero = () => {
   return (
     <div className="h-screen flex justify-center items-center text-center flex-col gap-6 mt-[-7rem] sm:mt-[-7rem] px-2">
       <h1 className="font-extrabold text-3xl sm:text-5xl">
-        Explore and Create Stories on BlogSphere
+        Welcome to the BlogSphere
       </h1>
       <h2 className="text-lg sm:text-xl text-muted-foreground">
         Immerse Yourself in a Diverse Community of Writers and Readers, and
