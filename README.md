@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<!-- TABLE OF CONTENTS -->
 
-## Getting Started
+# 📗 Table of Contents
 
-First, run the development server:
+- [📖 BlogSphere](#blog-sphere)
+  - [🛠 Built With](#built-with)
+    - [Tech Stack](#tech-stack)
+    - [Key Features](#key-features)
+  - [🚀 Live Demo](#live-demo)
+- [💻 Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Install](#install)
+  - [Usage](#usage)
+- [👥 Author](#author)
+- [🔭 Future Features](#future-features)
+- [🤝 Contributing](#contributing)
+- [⭐️ Show your support](#support)
+- [📝 License](#license)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<!-- PROJECT DESCRIPTION -->
+
+# 📖 BlogSphere <a name="blog-sphere"></a>
+
+**BlogSphere** is a simple yet powerful blog application that allows users to create, read, update, and delete blog posts, as well as manage comments on those posts. Built with Nextjs for full-stack, which allows faster page load due to server-side rendering and better SEO, and MongoDB for the database. With its seamless user experience, BlogSphere empowers users to share their thoughts and ideas with the world effortlessly.
+
+## 🛠 Built With <a name="built-with"></a>
+
+### Tech Stack <a name="tech-stack"></a>
+
+<details>
+  <summary>Front-End</summary>
+  <ul>
+    <li><a href="https://nextjs.org/">Nextjs</a></li>
+    <li><a href="https://ui.shadcn.com/">Shadcn</a></li>
+    <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
+  </ul>
+</details>
+
+<details>
+<summary>Back-End</summary>
+  <ul>
+    <li><a href="https://nextjs.org/">Nextjs</a></li>
+    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+  </ul>
+</details>
+
+<!-- Features -->
+
+### Key Features <a name="key-features"></a>
+
+- **User Authentication:** User authentication system for registering, and logging in user accounts.
+- **Blog Posts:** Authenticated and authorized users can create, update, and delete blog posts, whereas all users can read blog posts.
+- **Comments:** Authenticated and authorized users can write, update, and delete comments on blog posts, whereas all users can read the comments blog posts.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Click here to see the live project](https://blog-sphere-one.vercel.app/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+In order to run this project you need:
+
+- [Node.js](https://nodejs.org/en) installed.
+
+### Setup
+
+Clone this repository to your desired folder:
+
+```sh
+  git clone https://github.com/AbeeraTahir/blog-sphere.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install this project with:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```sh
+  npm install
+```
 
-## Learn More
+### Usage
 
-To learn more about Next.js, take a look at the following resources:
+To run the project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Create a `.env` file in the root of the project.
+- Inside that `.env` file, create a variable named `MONGO_URI` and assign your MongoDB connection link to it. Then create a variable named `JWT_SECRET` and your JWT secret key to that variable
+- Run the following command to see the website:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```sh
+  npm run dev
+```
 
-## Deploy on Vercel
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<!-- AUTHORS -->
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 👥 Author <a name="author"></a>
+
+👤 **Abeera Tahir**
+
+- GitHub: [@AbeeraTahir](https://github.com/AbeeraTahir)
+- LinkedIn: [Abeera Tahir](https://linkedin.com/in/abeera-tahir/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- Authentication from other platforms e.g. Google, Facebook etc. can be added.
+- Email confirmation and forgot password features can be added.
+- User profile page can be added where user can manage his profile and account.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
+
+Please give a ⭐️, if you like this project.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+> Add at least 2 questions new developers would ask when they decide to use your project.
+
+- **[Question_1]**
+
+  - [Answer_1]
+
+- **[Question_2]**
+
+  - [Answer_2]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
