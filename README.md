@@ -98,7 +98,7 @@ Install this project with:
 To run the project:
 
 - Create a `.env` file in the root of the project.
-- Inside that `.env` file, create a variable named `MONGO_URI` and assign your MongoDB connection link to it. Then create a variable named `JWT_SECRET` and your JWT secret key to that variable
+- Inside that `.env` file, create a variable named `MONGO_URI` and assign your MongoDB connection link to it. Then create a variable named `JWT_SECRET` and assign your JWT secret key to it.
 - Run the following command to see the website:
 
 ```sh
