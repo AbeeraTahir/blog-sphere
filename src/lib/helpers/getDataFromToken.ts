@@ -11,7 +11,6 @@ export const getDataFromToken = (request: NextRequest) => {
     const token = request.cookies.get("blogAppToken")?.value || null;
     if (token) {
       const decodedToken: any = decodeToken(token);
-      console.log(decodedToken);
       return decodedToken.id;
     } else {
       return null;
