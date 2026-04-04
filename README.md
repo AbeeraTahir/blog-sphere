@@ -6,7 +6,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
@@ -54,14 +53,6 @@
 - **User Authentication:** User authentication system for registering, and logging in user accounts.
 - **Blog Posts:** Authenticated and authorized users can create, update, and delete blog posts, whereas all users can read blog posts.
 - **Comments:** Authenticated and authorized users can write, update, and delete comments on blog posts, whereas all users can read the comments blog posts.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-- [Click here to see the live project](https://blog-sphere-one.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
